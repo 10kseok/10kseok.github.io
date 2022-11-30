@@ -357,6 +357,11 @@ If you want to display the **Liquid** snippet, surround the liquid code with `{%
 
 Or adding `render_with_liquid: false` (Requires Jekyll 4.0 or higher) to the post's YAML block.
 
+# 알쓸팁
+
+카테고리랑 태그는 설정한 언어에 맞게 작성해야 먹힌다.
+
+
 ## Learn More
 
 For more knowledge about Jekyll posts, visit the [Jekyll Docs: Posts](https://jekyllrb.com/docs/posts/).

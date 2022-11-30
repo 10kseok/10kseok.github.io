@@ -1,8 +1,8 @@
 ---
 title: jekyll-theme-Chirpy 적용(github page)
 date: 2022-12-01 01:03:00 +0900
-categories: [개발환경, Github]
-tags: [jekyll-theme]
+categories: [Development Environment, Github]
+tags: [github-page, jekyll-theme]
 ---
 
 |  |   |
