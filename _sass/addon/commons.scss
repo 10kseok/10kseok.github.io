@@ -408,6 +408,7 @@ img[data-src] {
 
       > img[data-src]:not(.normal):not(.left):not(.right) {
         @include align-center;
+
       }
     }
 
@@ -642,6 +643,10 @@ $sidebar-display: "sidebar-display";
   width: $sidebar-width;
   z-index: 99;
   background: var(--sidebar-bg);
+  /* background Image */
+  background: url('../../assets/img/sidebar/library.png');
+  background-size: 200% 100%;
+  background-position: center;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
