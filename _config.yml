@@ -24,7 +24,7 @@ title: Koesnam’s                          # the main title
 tagline: 하나둘씩 쌓아가는 개발지식   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+  10kseok, koesnam, 하나둘씩 쌓아가는 개발지식, 개발지식창고
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://10kseok.github.io'
@@ -198,3 +198,11 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+jekyll_compose:
+  auto_open: true
+  default_front_matter:
+    posts:
+      description:
+      category:
+      tags:
