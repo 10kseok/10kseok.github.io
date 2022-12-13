@@ -20,19 +20,19 @@ tags: [jekyll-compose]
 
 
 Gemfile에 아래 내용을 추가한다.
-```Gemfile
+~~~Gemfile
 gem 'jekyll-compose', group: [:jekyll_plugins]
-```
+~~~
 
 jekyll-compose 설치
-```Console
+~~~Console
 $ bundle
-```
+~~~
 
 아래의 명령어를 입력하면 _post폴더에 작성시간이 찍힌 파일이 생성된다.
-```Console
+~~~Console
 $ bundle exec jekyll post "글 제목!"
-```
+~~~
 
 
 
