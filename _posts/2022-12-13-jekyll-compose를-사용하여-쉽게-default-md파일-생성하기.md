@@ -3,7 +3,7 @@ layout: post
 title: jekyll-compose를 사용하여 쉽게 게시글 생성하기
 date: 2022-12-13 01:33 +0900
 description: 초안 작성을 위한 jekyll-compose
-category: [블로깅, jekyll]
+category: [블로깅, Jekyll]
 tags: [jekyll-compose, github page, m1 mac]
 ---
 
