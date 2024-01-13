@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 하드웨어 관점에서 프로그램은 어떻게 실행되는가
+title: 프로그램 실행:데이터와 인스트럭션으로 하는 핑퐁
 date: 2024-01-12 10:49 +0900
 description: CSAPP 1장
 category: [컴퓨터과학, Computer System]
