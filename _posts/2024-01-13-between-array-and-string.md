@@ -8,7 +8,7 @@ tags: [배열, 문자열, 연결 리스트, 해시 테이블]
 math: true
 ---
 
-순서가 있는 데이터를 여러개의 데이터를 저장할 때면 배열을 주로 이용한다. 
+순서가 있는 여러개의 데이터를 저장할 때면 배열을 주로 이용한다. 
 또한 배열은 가장 기초적인 자료구조이기도 하며,
 이러한 특성을 이용하여 구현한 자료구조도 있었다.
 이번에는 그러한 자료구조가 어떤식으로 구현되어있고, 무슨 문제를 해결하기 위해 탄생했는지 알아보려 한다.
@@ -40,7 +40,9 @@ math: true
 이에 대한 답은 파이썬이 데이터를 다루는 방식에 있다. 파이썬에서 모든 타입은 객체로 다뤄진다. 객체라는 말은 실제 값이 아닌 주소값, 즉 참조값을 갖는다. 그렇다보니 실제 배열에는 값이 담기는 것이 아니라, 그 값을 가리키는 참조값들이 연속적으로 저장되는 것이다. 참조값의 크기는 CPU word size와 동일한데, 64bit python이면 8byte의 크기를 가진다. 게다가 파이썬은 타입에 엄격하지 않으니, 여러 데이터 타입을 저장할 수 있게 된다.
 {: .prompt-tip }
 
+> 더 생각해볼 점
 ![파이썬 주소값 확인](https://koesnam.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e29bccb-b5af-45f7-9726-6b92c3af467e%2Fececa65c-30c9-4c52-a1d2-fc89e9845e6e%2FUntitled.png?table=block&id=07a3cb08-8a0b-46fe-8ebb-2079767ccaef&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&width=2000&userId=&cache=v2)
+[주소값 크기가 32 Byte로 나오는 이유](https://stackoverflow.com/questions/52916146/why-does-the-memory-location-for-integers-jump-by-32-bytes#:~:text=A%20structure%20in%20memory%20can%20be%2028%20bytes,that%20their%20start%20address%20are%2032%20bytes%20apart.)
 
 # 연결 리스트
 ---
