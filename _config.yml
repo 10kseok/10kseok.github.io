@@ -21,7 +21,7 @@ timezone: Asia/Seoul
 
 title: Koesnam’s                          # the main title
 
-tagline: 하나둘씩 쌓아가는 개발지식   # it will display as the sub-title
+tagline: 흩어진 지식의 연결     # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   10kseok, koesnam, 하나둘씩 쌓아가는 개발지식, 개발지식창고
