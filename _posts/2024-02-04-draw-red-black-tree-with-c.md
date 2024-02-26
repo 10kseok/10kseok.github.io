@@ -26,7 +26,7 @@ _1~6의 값이 순차적으로 삽입되었을 때의 이진 탐색 트리_
 그렇다보니 트리에 데이터가 어떻게 들어오든, 우리가 생각하는 이진 트리의 구조를 맞춰줄 방법이 필요하다. 이러한 행위를 균형을 맞춘다라고 하며, 데이터 변경시 스스로 균형을 맞추는 트리를 `자가 균형 이진 트리`라고 한다. 이 균형 이진 트리에는 **AVL 트리, RB 트리** 등이 있다.
 > *균형 트리로 보면 훨씬 더 많은 트리가 존재한다.* ex) B-Tree, 위상 정렬 트리, 최소 스패닝 트리 ...
 
-AVL(Adelson-Velsky and Landis) 트리는 각 자식 노드가 만드는 서브 트리의 높이 차를 계산하여 균형을 맞추는 트리이다.
+**AVL(Adelson-Velsky and Landis) 트리**는 각 자식 노드가 만드는 서브 트리의 높이 차를 계산하여 균형을 맞추는 트리이다.
 이러한 높이 차를 `균형 계수`(Balance Factor)라고 부르며, 이 값은 **-1, 0, 1** 셋 중 하나의 값을 가져야한다. 이러한 균형은 트리의 `회전`(Rotate)을 통해서 맞춰지며, 회전이 일어나는 시점은 균형 계수가 앞서 말한 -1, 0, 1의 범위에서 벗어난 경우이다.
 
 AVL 트리는 균형을 엄격하게 잡기에 탐색에는 유리하나, 삽입/삭제시에 이러한 BF 값을 제대로 만족하는지 삽입/삭제되는 노드부터 루트 노드까지 계산(retracing)하므로, 삽입/삭제시 많은 연산이 발생한다. 따라서 삽입/삭제가 잦은 데이터는 균형을 엄격하게 잡는 AVL 트리에 저장하기에는 무리가 있어, 수정보단 **탐색이 용이한**, 예를 들자면 사전같은 **데이터를 저장하기에 적합**하다.
@@ -62,11 +62,74 @@ RB 트리를 구현하는데 있어 기본적인 것은 이진 트리와 유사�
 
 이 글에서는 자세한 구현 사항은 구현 결과가 담긴 레포지토리를 남기는 것으로 하고, 핵심적인 연산의 의사코드(pseudo code)만을 살펴보겠다.
 
-```pseudo
-rotate(x, y)
-    x = y
-    temp = y
+우선은, 트리의 특성을 복구시키는데 필요한 회전이다. 회전은 왼쪽 회전과 오른쪽 회전으로 나눠서 볼 수 있는데, 왼쪽 회전의 코드에서 변수의 위치값만 바뀌면 오른쪽 회전 코드가 된다.
+```c
+left_rotate(tree, cur_node)
+    right_node = cur_node.right
+    cur_node.right = right_node.left
+    if right_node.left != tree.nil // tree.nil은 Sentinel Node를 말한다
+        right_node.left.parent = cur_node
+    right_node.parent = cur_node.parent
+
+    if cur_node.parent == tree.nil // 현재 노드가 부모 노드가 없다는 뜻은 현재 노드가 루트임을 뜻한다
+        tree.root = right_node
+    else if cur_node == cur_node.parent.left // 현재 노드가 부모 노드의 왼쪽 자식이면
+        cur_node.parent.left = right_node // 부모 노드의 왼쪽 자식을 바뀐 노드로 변경해준다
+    else 
+        cur_node.parent.right = right_node
+
+    right_node.left = cur_node
+    cur_node.parent = right_node
 ```
+
+위 코드는 사실 그림으로 보는 것이 이해가 빠르다. 따라서 코드를 그림으로 나타내면 아래와 같다.  
+![left-rotate](https://koesnam.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e29bccb-b5af-45f7-9726-6b92c3af467e%2F54a07725-6b84-4e22-9042-73b15497348c%2FIMG_E4F83942A738-1.jpeg?table=block&id=2fd1499a-6348-4a33-a8f9-71f052480411&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&width=2000&userId=&cache=v2)
+
+RB 트리의 연산에서 삭제 후 복구하는 로직이 가장 어렵기도 하며 중요하다. 삭제될 때 발생하는 경우가 4가지 정도가 있다. 이 때 처리되는 방식은 다 다르며, 이를 간단하게 하기 위해서 공통되는 로직으로 변환하여 처리할 수 있다.
+
+1. **삭제되는 노드(흑색 노드)의 형제 노드가 적색인 경우**
+2. **삭제되는 노드(흑색 노드)의 형제 노드가 흑색이고, 두 자식이 모두 흑색인 경우**
+3. **삭제되는 노드(흑색 노드)의 형제 노드가 흑색이고, 형제 노드의 왼쪽 자식은 적색, 오른쪽 자식이 흑색인 경우**
+4. **삭제되는 노드(흑색 노드)의 형제 노드가 흑색이고, 형제 노드의 오른쪽 자식이 적색인 경우**
+
+경우 1번은 경우 2번 형태로 변환하여 처리할 수 있으며, 경우 3번은 4번 형태로 변환하여 처리할 수 있다. 이를 코드로 나타내보자.
+
+```c
+delete_fixup(tree, delete_node)
+    while delete_node != tree.root and delete_node.color == BLACK
+        // 삭제되는 노드가 부모 노드 기준으로 왼쪽 자식일 때
+        if delete_node == delete_node.parent.left
+            brother_node = delete_node.parent.right
+            // 경우 1
+            if brother_node.color == RED
+                brother_node.color == BLACK
+                delete_node.parent.color = RED
+                left_rotate(tree, delete_node.parent)
+                brother_node = delete_node.parent.right
+            // ---
+            // 경우 2
+            if brother_node.left.color == BLACK and brother_node.right.color == BLACK
+                brother_node.color = RED
+                delete_node = delete_node.parent
+            // ---
+            else 
+                // 경우 3
+                if brother_node.right.color == BLACK
+                    brother_node.left.color == BLACK
+                    brother_node.color = RED
+                    left_rotate(tree, brother_node)
+                    brother_node = delete_node.parent.right
+                // ---
+                // 경우 4
+                brother_node.color = delete_node.parent.color
+                delete_node.parent.color = BLACK
+                brother_node.right.color = BLACK
+                left_rotate(tree, delete_node.parent)
+                delete_node = tree.root
+        // 삭제되는 노드가 부모 노드 기준으로 오른쪽 자식일 때, 위 코드에서 left <-> right를 대칭적으로 바꿔주면 된다
+    delete_node.color = BLACK
+```
+복구하는 연산은 삭제 연산 코드에서 제일 마지막에서 실행되며, 이를 통해 매 삭제시에도 트리가 RB 트리의 특성을 만족시키게 된다.
 
 # 마무리
 ---
