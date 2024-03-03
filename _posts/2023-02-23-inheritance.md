@@ -3,14 +3,8 @@ layout: post
 title: "[Java] class의 Inheritance는 상속이 아니다"
 date: 2023-02-23 01:16 +0900
 description: 
-category:
-- 자바
-- Java
-tags:
-- java
-- 상속
-- 인터페이스
-- 추상클래스
+category: [프로그래밍, Java]
+tags: [java, 상속, 인터페이스, 추상클래스]
 ---
 > 개념 하나에 대한 여러 정보를 짧게 나열해보고 뒤에서 정리한다.
 {: .prompt-tip }

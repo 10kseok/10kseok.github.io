@@ -3,7 +3,7 @@ layout: post
 title: "[Java] Tic-Tac-Toe 구현부터 개선까지"
 date: 2023-01-23 16:16 +0900
 description: 
-category: [자바, Implement]
+category: [프로그래밍, Implement]
 tags: [TicTacToe, Refactoring, Java]
 ---
 
