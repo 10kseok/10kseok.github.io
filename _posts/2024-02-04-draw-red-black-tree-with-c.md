@@ -20,7 +20,7 @@ tags: [그래프, 트리, 이진 탐색 트리, RB 트리]
 혹여나, 데이터가 정렬되어 순차적으로 들어오게 된다면, 트리가 한쪽으로 쏠려 결국 연결리스트와 다를 바가 없어진다.
 > *연결리스트가 된다는 것은 탐색시 시간복잡도가 __O(N)__ 이 되는 것을 의미한다.*
 
-![대충 이진 탐색 트리가 연결리스트가 된 그림](https://file.notion.so/f/f/6e29bccb-b5af-45f7-9726-6b92c3af467e/fd7502d4-88ec-48ba-9292-7cf60a68b3c9/IMG_ADE34BEDA4F9-1.jpeg?id=8ee7732d-807a-432a-915c-7f3677564a09&table=block&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&expirationTimestamp=1708970400000&signature=omDGli3wFrAtis29GzmdEQvXGFlq7fmopquIIO8UKCg&downloadName=IMG_ADE34BEDA4F9-1.jpeg)
+![이진 탐색 트리가 연결리스트가 된 그림](https://koesnam.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e29bccb-b5af-45f7-9726-6b92c3af467e%2Ffd7502d4-88ec-48ba-9292-7cf60a68b3c9%2FIMG_ADE34BEDA4F9-1.jpeg?table=block&id=8ee7732d-807a-432a-915c-7f3677564a09&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&width=2000&userId=&cache=v2)
 _1~6의 값이 순차적으로 삽입되었을 때의 이진 탐색 트리_
 
 그렇다보니 트리에 데이터가 어떻게 들어오든, 우리가 생각하는 이진 트리의 구조를 맞춰줄 방법이 필요하다. 이러한 행위를 균형을 맞춘다라고 하며, 데이터 변경시 스스로 균형을 맞추는 트리를 `자가 균형 이진 트리`라고 한다. 이 균형 이진 트리에는 **AVL 트리, RB 트리** 등이 있다.
@@ -39,7 +39,7 @@ RB 트리는 빠른 조회를 원하고, **삽입과 삭제가 잦은 데이터�
 
 노드의 색상이 특정 규칙을 만족시키지 않을 때 `재색칠`(Recoloring) 또는 `회전`(Rotate)을 하게 되며, 이를 통해 트리의 균형을 맞춰 나간다. 이러한 작업은 삽입되는 위치 근처에서 일어나게 되며, 특정 상황에는 균형이 안 맞기도 한다. 이로 인해 AVL 트리에 비해 균형은 조금 덜 잡혀있게 되지만, 삽입과 삭제시에 오버헤드가 적어 유리하다.
 
-![1~7 까지 삽입시 이미지](https://file.notion.so/f/f/6e29bccb-b5af-45f7-9726-6b92c3af467e/63b665eb-e813-417a-be80-deec9768360a/rb-tree-insertion-ezgif.com-video-to-gif-converter.gif?id=fff70311-509f-4fbb-9a07-6ceb05e6f4ca&table=block&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&expirationTimestamp=1708970400000&signature=ETc6tJB-0rV9acYHeTTqGRDaF6plFWY2VXOcolWCKqk&downloadName=rb-tree-insertion-ezgif.com-video-to-gif-converter.gif)
+![1~7 까지 삽입시 이미지](https://file.notion.so/f/f/6e29bccb-b5af-45f7-9726-6b92c3af467e/63b665eb-e813-417a-be80-deec9768360a/rb-tree-insertion-ezgif.com-video-to-gif-converter.gif?id=fff70311-509f-4fbb-9a07-6ceb05e6f4ca&table=block&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&expirationTimestamp=1710957600000&signature=ra6JN__COGLch9EJjJYIgFp4qccHBjumdrInUVXQD8g)
 _[Red-Black Tree 시각화 사이트](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)_
 
 ## 특성
