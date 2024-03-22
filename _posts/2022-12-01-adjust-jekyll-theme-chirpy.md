@@ -17,7 +17,7 @@ tags: [github-page, jekyll-theme]
 ### chirpy theme을 fork 또는 zip파일 다운로드를 통해 자신의 git 프로젝트 폴더에 옮기고 bundle을 통해 gemfile에 기록된 dependency를 설치한 후의 과정
 
 chirpy theme 적용에 있어 **Point**는 두 개다.
-1. **ruby버전**을 본인 로컬 루비버전과 맞춰줘야하며
+1. ~~ruby버전을 본인 로컬 루비버전과 맞춰줘야하며~~ jekyll 버전과 호환되는 ruby 버전으로 맞춰줘야한다.
 2. branch를 통한 github page deploy가 아니라 **github action**을 이용해줘야한다는 것이다.
 
 	>2 . github action을 사용하는 것으로 설정하면 바로 밑에 jekyll action이 뜨면서 Configure을 눌러 사용하도록 한다.
