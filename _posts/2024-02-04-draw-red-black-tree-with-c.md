@@ -39,7 +39,7 @@ RB 트리는 빠른 조회를 원하고, **삽입과 삭제가 잦은 데이터�
 
 노드의 색상이 특정 규칙을 만족시키지 않을 때 `재색칠`(Recoloring) 또는 `회전`(Rotate)을 하게 되며, 이를 통해 트리의 균형을 맞춰 나간다. 이러한 작업은 삽입되는 위치 근처에서 일어나게 되며, 특정 상황에는 균형이 안 맞기도 한다. 이로 인해 AVL 트리에 비해 균형은 조금 덜 잡혀있게 되지만, 삽입과 삭제시에 오버헤드가 적어 유리하다.
 
-![1~7 까지 삽입시 이미지](https://file.notion.so/f/f/6e29bccb-b5af-45f7-9726-6b92c3af467e/63b665eb-e813-417a-be80-deec9768360a/rb-tree-insertion-ezgif.com-video-to-gif-converter.gif?id=fff70311-509f-4fbb-9a07-6ceb05e6f4ca&table=block&spaceId=6e29bccb-b5af-45f7-9726-6b92c3af467e&expirationTimestamp=1710957600000&signature=ra6JN__COGLch9EJjJYIgFp4qccHBjumdrInUVXQD8g)
+![1~7 까지 삽입시 이미지](https://github.com/10kseok/10kseok.github.io/assets/76582376/a83169b7-363e-4795-98a6-2fb66a90c54c)
 _[Red-Black Tree 시각화 사이트](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)_
 
 ## 특성
