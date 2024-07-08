@@ -1,6 +1,6 @@
 ---
 layout: post
-title: <b>C</b><i>(repas)</i>로 그린 빨강-검정나무
+title: C(repas)로 그린 빨강-검정나무
 date: 2024-02-04 17:03 +0900
 description: RB 트리 구현기
 category: [컴퓨터과학, Data Structure]
