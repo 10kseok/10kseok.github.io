@@ -84,7 +84,7 @@ class Desktop extends Samsung { ... } // 데스크탑은 삼성의 한 종류이
 
 ```java
 abstract class Computer { 
-    // Computer는 데스크탑, 노트북, 미니PC, 서버PC 등으로 정의되지 않았기에 객체로 사용하지 못한다.
+    // Computer는 데스크탑, 노트북, 미니PC, 서버 등으로 정의되지 않았기에 객체로 사용하지 못한다.
     // Computer 클래스는 모든 하위 개념들이 가지는 공통되는 데이터와 행위를 가지기에
     // Desktop, Laptop, MiniPC, Server 등의 Super class로는 존재 가능.
     Cpu cpu;
