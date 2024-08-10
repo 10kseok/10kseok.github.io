@@ -22,7 +22,7 @@ HTTP로 인증하는 방식에는 여러 종류가 있었는데, 그 중 가장 
 이 과정에서 서버는 전송받은 자격증명과 DB에 정보와 일치하면 사이트로부터 회원임을 인증 받는다.
 여기서 주의해야할 점은 Basic 인증은 **자격증명을 그대로 노출**시킨다는 점이다. Base64 인코딩은 안전하게 전송하기 위한 수단일 뿐, 보안은 적용되어 있지 않다. 따라서 이러한 상황에서는 HTTPS 통신이 필수적이다.
 
-![HTTP 인증](https://developer.mozilla.org/ko/docs/Web/HTTP/Authentication/http-auth-sequence-diagram.png){: style="background-color:white" width="972" height="589" }
+![HTTP 인증](https://mdn.github.io/shared-assets/images/diagrams/http/authentication/basic-auth.svg){: style="background-color:white" width="972" height="589" }
 _출처 : <https://developer.mozilla.org/ko/docs/Web/HTTP/Authentication>_
 
 HTTP는 무상태성을 가지므로, 현재의 요청은 과거의 요청과는 상관없이 독립적이다.  
