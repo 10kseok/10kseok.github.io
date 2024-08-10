@@ -4,7 +4,7 @@ title: 일어나야해! 넌 조선의 자존심이야! (1/2)
 date: 2024-07-08 23:33 +0900
 description: 로아 회고글
 category: [프로젝트, reflection]
-tags: [Krafton Jungle, LOA, Chrome Extension, Nest, Vanila js]
+tags: [Krafton Jungle, LOA, Chrome Extension, Nest, Vanila js, 크래프톤 정글 회고]
 ---
 
 크래프톤 정글의 마지막 프로젝트로 [로아(LOA, Learn On Air)](https://github.com/makeMyOwnWeapon)를 개발했다. 로아는 **AI 온라인 학습 도우미**를 목표로 사용자 웹캠을 통해 졸음을 감지하여 깨워주고 강의를 잘 듣고 있는 지 문제도 출제해주는 서비스이다. 백엔드를 책임지는 역할이었으나 필요한 곳에 유동적으로 투입되어 개발하다 보니 다양한 부분에서의 트러블 슈팅을 경험할 수 있었다.

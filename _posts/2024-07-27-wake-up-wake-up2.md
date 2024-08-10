@@ -4,7 +4,7 @@ title: (Writing) 일어나야해! 넌 조선의 자존심이야! (2/2)
 date: 2024-07-27 01:48 +0900
 description: 로아 회고글
 category: [프로젝트, reflection]
-tags: [Krafton Jungle, LOA, Nest, LLM]
+tags: [Krafton Jungle, LOA, Nest, LLM, 크래프톤 정글 회고]
 ---
 
 전편에서는 클라이언트와 서비스 방향이 중점이였다면, 이번 편은 조금 더 백엔드 중심적인 이야기이자 기술적인 내용을 담고 있다.
