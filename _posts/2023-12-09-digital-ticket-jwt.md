@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JWT 구현시 JWTToken 이라고 하지 말자
+title: 디지털 입장권 JWT 인증 알아보기
 date: 2023-12-09 20:05 +0900
 description: 쿡슝 프로젝트에서 인증을 맡으며..
 category: [프로젝트, reflection]
