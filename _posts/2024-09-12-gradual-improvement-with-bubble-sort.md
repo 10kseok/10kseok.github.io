@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[WRITING] 버블 정렬로 해보는 점진적 개선: 버블 정렬에서 칵테일 정렬까지"
+title: "버블 정렬로 해보는 점진적 개선: 버블 정렬에서 칵테일 정렬까지"
 date: 2024-09-12 23:43 +0900
 description: 버블 소트로 해보는 점진적 개선
 category: [컴퓨터과학, Algorithm]
@@ -147,22 +147,22 @@ def bubble_sort_check_exchange(unsorted_list):
 
 class TestBubbleSort(unittest.TestCase):
     large_data = list(range(1, 10001))
-	large_data[-1], large_data[-2] = large_data[-2], large_data[-1] # 한번 교환
+    large_data[-1], large_data[-2] = large_data[-2], large_data[-1] # 한번 교환
     ...
 
     def test_bubble_sort_many(self):
-		test_data = self.large_data.copy()
-		start_time = time.time(); bubble_sort(test_data); end_time = time.time()
-		execution_time = (end_time - start_time) * 1000  # ms로 변환
-		self.assertEqual(test_data, list(range(1, 10001)))
-		print(f"실행 시간: {execution_time:.3f} ms")
+        test_data = self.large_data.copy()
+        start_time = time.time(); bubble_sort(test_data); end_time = time.time()
+        execution_time = (end_time - start_time) * 1000  # ms로 변환
+        self.assertEqual(test_data, list(range(1, 10001)))
+        print(f"실행 시간: {execution_time:.3f} ms")
   
-	def test_bubble_sort_check_exchange_many(self):
-		test_data = self.large_data.copy()
-		start_time = time.time(); bubble_sort_check_exchange(test_data); end_time = time.time()
-		execution_time = (end_time - start_time) * 1000  # ms로 변환
-		self.assertEqual(test_data, list(range(1, 10001)))
-		print(f"실행 시간: {execution_time:.3f} ms")
+    def test_bubble_sort_check_exchange_many(self):
+        test_data = self.large_data.copy()
+        start_time = time.time(); bubble_sort_check_exchange(test_data); end_time = time.time()
+        execution_time = (end_time - start_time) * 1000  # ms로 변환
+        self.assertEqual(test_data, list(range(1, 10001)))
+        print(f"실행 시간: {execution_time:.3f} ms")
 ```
 {: file='test_bubble_sort.py'}
 
@@ -232,8 +232,8 @@ ok
 
 ```python
 class TestBubbleSort(unittest.TestCase):
-	large_data = list(range(1, 10001))
-	large_data[-1001], large_data[-1002] = large_data[-1002], large_data[-1001]
+    large_data = list(range(1, 10001))
+    large_data[-1001], large_data[-1002] = large_data[-1002], large_data[-1001]
     ...
 ```
 
@@ -249,7 +249,7 @@ test_bubble_sort_check_exchange_many (__main__.TestBubbleSort.test_bubble_sort_c
 ok
 ```
 
-## 3차 개선: 칵테일 정렬
+## 3차 개선: 셰이킹
 ---
 이번에는 앞에 내용을 조금 더 응용해서 개선시켜볼 수 있다. 앞에선 뒷부분에 스캔 범위만을 줄였는데, 그것과 동일하게 앞부분에도 똑같이 적용시킬 수가 있다. 따라서 양 쪽으로의 스캔 범위를 제한해주는 것이다. 그림을 보면 쉽게 이해가 될 것이다.
 
