@@ -89,4 +89,4 @@ mediapipe의 성능으로 인해 프레임워크 자체를 버릴 순 없었고 
 ---
 
 *글이 너무 길어져 다음 편에서 백엔드 이전에 대한 내용을 자세하게 다루겠다!*   
-[일어나야해! 넌 조선의 자존심이야! 2편](https://10kseok.github.io/posts/wake-up-wake-up2)
+[일어나야해! 넌 조선의 자존심이야! 2편](https://10kseok.github.io/posts/wake-up-wake-about-backend/)
