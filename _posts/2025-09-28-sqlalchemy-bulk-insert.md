@@ -89,17 +89,25 @@ bulk_insert_mappings은 엔터티 객체를 생성하지 않으므로 save_objec
 
 SQLAlchemy의 Core API를 사용하면 SQL 표현식을 직접 작성할 수 있고 add_all에 비해 30배 이상 빠르게 실행된다.[^footnote]
 
+>bulk_* 메서드는 동기 환경에서만 지원하며 비동기 환경에서는 run_sync() 메서드를 통해서 호출해야 한다.
 
-## Bulk 메서드의 한계
+## MySQL에서 Bulk 메서드 한계
 
-Bulk 메서드는 성능상 이점이 있지만 생성된 객체의 상태를 유지하기에는 제약이 있다.
-생성된 객체의 상태를 유지한다는 것은 변경 사항이 추적되고 이를 통해 별다른 조회 없이도 추가적인 작업이 가능하다는 의미이다.
+Bulk 메서드 사용시 return_defaults 인자(core api에서는 returing 메서드)를 True로 전달하면 생성된 엔터티를 반환받을 수 있다. 엔터티를 반환받게 되면 세션에서 다시 추가되어 변경 사항 추적이 가능하다.
 
+대부분의 DB에서는 이렇듯 생성된 엔터티를 반환받을 수 있으나, MySQL은 불가능하다.
+이 return_defaults 인자는 RETURNING 구문을 사용하여 삽입된 레코드의 기본값을 반환받는 방식으로 동작한다.
+
+```python
+session.bulk_insert_mappings(User, user_data, return_defaults=True)
+# or
+insert(User).values(user_data).returning(User)
+```
 
 하지만 MySQL은 다른 데이터베이스(PostgreSQL, MariaDB, SQLite 등)와 달리 `RETURNING` 구문을 지원하지 않는다.
 따라서, MySQL에서는 bulk 메서드를 사용하여 생성된 엔터티를 반환받을 수 없다.  
 
-엄밀히 말하자면 return_defaults 인자를 True로 전달하면 반환 받을 수 있으나, 이 경우에는 개별 INSERT 문이 실행되어 bulk 메서드의 성능 이점이 사라진다. SQLAAlchemy 공식 문서에서도 MySQL과 같은 경우에는 이 인자를 권장하지 않고 차라리 add_all() 사용을 권장한다.[^fn-nth-2]
+엄밀히 말하자면 MySQL을 쓰더라도 bulk 메서드에서 return_defaults 인자를 True로 전달하면 반환 받을 수 있으나, 이 경우에는 개별 INSERT 문이 실행되어 bulk 메서드의 성능 이점이 사라진다. SQLAlchemy 공식 문서에서도 MySQL과 같은 경우에는 이 인자를 권장하지 않고 차라리 add_all() 사용을 권장한다.[^fn-nth-2]
 
 MySQL에서 bulk 메서드를 사용할 때 생성된 엔터티를 반환받아야 한다면 결국 다시 조회해야하는데 다음과 같은 방법을 고려할 수 있다.
 
@@ -123,10 +131,9 @@ SQLAlchemy는 세션 내에서 객체의 고유성을 보장하기 위해 Identi
 
 ## 결론
 
-- `add_all()` 사용 시 개별 INSERT 문이 여러 번 실행됨을 인지해야 한다
-- 대량 데이터 삽입 시에는 `bulk_save_objects()` 또는 `bulk_insert_mappings()` 사용을 권장한다
-- Bulk 메서드는 성능상 이점이 있지만, 생성된 엔터티를 반환하지 않으므로 필요시 추가 처리가 필요하다
-- 상황에 따라 적절한 방법을 선택하여 성능과 기능 요구사항의 균형을 맞춰야 한다
+- `add_all()` 사용 시 개별 INSERT 문이 여러 번 실행된다
+- MySQL에서는 bulk 메서드 사용 시 생성된 엔터티를 반환받으려면 추가적인 조치가 필요하다
+- ...
 
 
 ## 참고문서
