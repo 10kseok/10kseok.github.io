@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SQLAlchemy Bulk Insert
-date: 2025-09-28 14:55 +0900
+date: 2026-02-01 14:55 +0900
 description: SQLAlchemy에서 대량 데이터 삽입 시 성능 최적화 방법과 각 방법의 한계점 분석
 category: [프로그래밍, Python]
 tags: [FastAPI, SQLAlchemy, ORM]
@@ -33,7 +33,7 @@ def add_all(self, instances: Iterable[object]) -> None:
         self.add(instance, _warn=False)
 ```
 
-add() 메서드는 객체를 세션에 추가하고 변경사항을 추적하는 역할을 한다.  
+add() 메서드는 객체를 세션에 추가하고 변경사항을 추적할수 있도록 한다.  
 (여기서 세션은 메모리에서 관리하는 영속성 셋(set)을 의미한다. JPA의 영속성 컨텍스트와 유사하다.)    
 flush() 또는 commit()이 호출되면 SQLAlchemy는 세션에 추가된 객체에 대해 개별 INSERT 문을 생성하고 실행한다.  
 
@@ -52,10 +52,15 @@ INSERT INTO users (name) VALUES ('user3');
 
 n이 적을 때는 문제가 없겠지만, n이 커질수록 쿼리당 라운드트립 시간 * n 만큼 실행 시간이 늘어나게 된다.
 
+## add_all() 메서드의 설계 의도
+
+설계 의도를 명확히 설명하는 자료는 없었지만 0.4 버전부터 도입된 기능으로 단순하게 add 동작에 다중 원소를 대응해주기 위한 메서드로 해석할 수 있다.
+
+
 ## add_all() 메서드의 대안
 
 add_all() 메서드명을 보면 기대하듯이 알아서 깔끔하게 한번에 추가해주면 좋을련만 그렇지 않으니 아쉬운 부분이다.  
-대부분의 데이터베이스는 다중 행 삽입(bulk insert)을 지원하니 이를 활용하면 성능을 크게 향상시킬 수 있을 것이다.
+성능이 중요한 경우에는 대부분의 데이터베이스는 다중 행 삽입(bulk insert)을 지원하니 이를 활용해서 성능을 크게 향상시킬 수 있다.
 bulk insert는 단일 INSERT 문으로 여러 레코드를 한 번에 삽입하는 방식이다. SQLAlchemy는 이에 총 3가지 방법을 제공한다.
 
 ### 1. bulk_save_objects
@@ -84,8 +89,8 @@ session.commit()
 ```
 
 이 메서드들은 단일 INSERT 문으로 여러 레코드를 한 번에 삽입하여 성능을 크게 향상시킨다.
-bulk_save_objects은 엔터티 기반으로 데이터 삽입을 지원하며, bulk_insert_mappings은 딕셔너리 기반으로 삽입을 지원한다.
-bulk_insert_mappings은 엔터티 객체를 생성하지 않으므로 save_objects에 비하면 메모리 사용량이 더 적다. 
+bulk_save_objects는 엔터티 기반으로 데이터 삽입을 지원하며, bulk_insert_mappings는 딕셔너리 기반으로 삽입을 지원한다.
+bulk_insert_mappings는 엔터티 객체를 생성하지 않으므로 save_objects에 비하면 메모리 사용량이 더 적다. 
 
 SQLAlchemy의 Core API를 사용하면 SQL 표현식을 직접 작성할 수 있고 add_all에 비해 30배 이상 빠르게 실행된다.[^footnote]
 
@@ -119,23 +124,14 @@ innodb_autoinc_lock_mode가 0(traditional) 또는 1(consecutive)인 경우에는
 
 2번은 삽입 시점에 고유한 값을 부여하는 작업이 추가로 필요하여 번거롭다. 이 필드는 삽입 시점에만 의미가 있으므로 계속 남겨두기엔 꺼려질 수 있다.
 
-## SQLAlchemy 동작 방식 이해
+## SQLAlchemy 2.0에서는?
 
-앞에서 말한 session 설명.... ING
-
-### Identity Map
-SQLAlchemy는 세션 내에서 객체의 고유성을 보장하기 위해 Identity Map 패턴을 사용한다. 각 객체는 메모리에서 단 하나의 인스턴스만 존재한다.
-
-### Unit of Work
-변경사항을 추적하고 commit 시점에 한 번에 데이터베이스에 반영하는 패턴이다. 이로 인해 `add_all()`은 각 객체의 상태를 추적해야 하므로 개별 INSERT가 발생한다.
-
-## 결론
-
-- `add_all()` 사용 시 개별 INSERT 문이 여러 번 실행된다
-- MySQL에서는 bulk 메서드 사용 시 생성된 엔터티를 반환받으려면 추가적인 조치가 필요하다
-- ...
+사실상 SQLAlchemy 2.0 버전부터는 다중 행 INSERT를 한 번에 묶어 실행하는 insertmanyvalues 최적화 기능이 들어가 대부분의 DB에서는 add_all을 사용해도 성능 차이가 거의 없다.[^fn-nth-3]
+MySQL만 RETURNING 구문을 지원하지 않아 대안으로 제시됐던 메서드를 사용해야만 한다.
+그러니 MySQL이 아니라면 SQLAlchemy 2.0 버전부터는 add_all을 그대로 사용하자.
 
 
 ## 참고문서
 [^footnote]: [stackoverflow - Bulk 연산 성능 비교](https://stackoverflow.com/questions/3659142/bulk-insert-with-sqlalchemy-orm)  
 [^fn-nth-2]: [SQLAlchemy 공식 문서 - Bulk Operations](https://docs.sqlalchemy.org/en/20/orm/session_api.html#sqlalchemy.orm.Session.bulk_save_objects)
+[^fn-nth-3]: [SQLAlchemy 공식 문서 - 2.0 릴리즈 노트](https://www.sqlalchemy.org/blog/2023/01/26/sqlalchemy-2.0.0-released/)
